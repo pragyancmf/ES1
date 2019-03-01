@@ -1,0 +1,11 @@
+package snippet;
+
+public class Snippet {
+	appender.console.type = Console
+	appender.console.name = console
+	appender.console.layout.type = PatternLayout
+	
+	rootLogger.level = info
+	rootLogger.appenderRef.console.ref = console
+}
+
