@@ -5,19 +5,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Calendar;
 import java.util.Iterator;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDDocumentInformation;
 import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.PDPageTree;
 import org.apache.pdfbox.pdmodel.PDResources;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.springframework.stereotype.Component;
 
+import com.elastic.dto.Document;
 import com.elastic.dto.Student;
 
 @Component
@@ -74,7 +71,7 @@ public class DocumentServiceImpl {
 		return null;
 	}
 
-	public String getTextFromPDF(String path) throws IOException {
+	public Document getTextFromPDF(String path) throws IOException {
 
 		//File file = new File("C:\\Users\\harshg\\Desktop\\student2.pdf");
 		File file = new File(path);
@@ -82,10 +79,13 @@ public class DocumentServiceImpl {
 		PDFTextStripper pdfStripper = new PDFTextStripper();
 		String text = pdfStripper.getText(document);
 
-		System.out.println(text);
-
+		Document doc  = new Document();
+		doc.setAuthor(document.getDocumentInformation().getAuthor());
+		doc.setText(text);
+		doc.setTitle(document.getDocumentInformation().getTitle());
+		doc.setDocumentName(file.getName());
 		document.close();
-		return text;
+		return doc;
 	}
 
 	public String readData() throws IOException {

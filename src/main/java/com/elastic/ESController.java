@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.elastic.dto.Document;
+import com.elastic.dto.DocumentResponse;
 import com.elastic.dto.DocumentSearchRequest;
 import com.elastic.dto.SearchRequest;
 import com.elastic.dto.Student;
@@ -68,8 +69,14 @@ public class ESController {
     }
 	
 	@PostMapping("/document/search")
-	public ResponseEntity<List<Document>> searchDocuments(@RequestBody DocumentSearchRequest searchRequest) throws UnknownHostException {
+	public ResponseEntity<List<DocumentResponse>> searchDocuments(@RequestBody DocumentSearchRequest searchRequest) throws UnknownHostException {
 		
 		return ResponseEntity.ok(service.searchDocument(searchRequest));
 	}
+	
+	@GetMapping("/test")
+    public ResponseEntity<Void> test() throws IOException {
+		service.test();
+		return ResponseEntity.ok().build();
+    }
 }

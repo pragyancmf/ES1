@@ -49,14 +49,16 @@ public class ElasticServiceTest {
 	@Test
 	public void docTest() throws IOException {
 
-		DocumentServiceImpl docService = new DocumentServiceImpl();
-		// docService.getStudentDataFromPDF("C:/Users/harshg/Desktop/pdf.pdf");
-		docService.readData();
+		//DocumentServiceImpl docService = new DocumentServiceImpl();
+		//docService.getTextFromPDF("C:/Users/harshg/Desktop/SchemeInfo.pdf");
+		//docService.readData();
 
 		/*
 		 * Document doc = new Document(); doc.setAuthor("Pragyan");
 		 * doc.setDocumentId(1l); doc.setText("xyz"); doc.setTitle("title"); String s =
 		 * new String(getBytes(doc)); System.out.println(s);;
 		 */
+		 ElasticServiceImpl elasticServiceImpl = new ElasticServiceImpl();
+		 elasticServiceImpl.test();
 	}
 }

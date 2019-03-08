@@ -1,0 +1,89 @@
+1) Download ElasticSearch 5.6 ZIP from
+	https://www.elastic.co/downloads/past-releases/elasticsearch-5-6-0
+
+2) Extract the zip contents to C drive
+3) run C:\elasticsearch-5.6.0\bin\elasticsearch.bat
+	Now elasticsearch instance will be started with a cluster named as elasticsearch at port 9200 and a node with some name will be created
+
+4) Create an INDEX
+-------------------
+
+	use ElasticSearch REST api
+
+	PUT http://localhost:9200/test?pretty
+
+	INDEX with name "test" will be created
+
+
+5) Create a type "docs"
+------------------------
+	
+	PUT http://localhose:9200/test/docs
+
+	Request Body:
+
+	{
+	"test": {
+		"mappings": {
+			"docs": {
+				"properties": {
+					"author": {
+						"type": "text",
+						"fields": {
+							"keyword": {
+								"type": "keyword",
+								"ignore_above": 256
+							}
+						}
+					},
+					"documentId": {
+						"type": "long"
+					},
+					"documentName": {
+						"type": "text",
+						"fields": {
+							"keyword": {
+								"type": "keyword",
+								"ignore_above": 256
+							}
+						}
+					},
+					"text": {
+						"type": "text",
+						"fields": {
+							"keyword": {
+								"type": "keyword",
+								"ignore_above": 256
+							}
+						}
+					},
+					"title": {
+						"type": "text",
+						"fields": {
+							"keyword": {
+								"type": "keyword",
+								"ignore_above": 256
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+6) Start the application
+
+7) To read and save an pdf file use api
+	localhost:8080/api/document/read-and-save?path={document path}
+
+8) To search a phrase, use api
+	
+	POST localhost:8080/api/document/search
+	Request Body:
+		
+		{
+			"searchStrings": "investment choice"
+		}
